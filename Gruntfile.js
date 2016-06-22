@@ -26,10 +26,9 @@ module.exports = function (grunt) {
 			// },
 			custom: {
 				options: {
-					projectPath: './test/fixtures',
-					csporjLocation: 'auto',
-					watch: ['Scripts/*.js', 'Content/**/*.css'],
-					ignore: ['Scripts/test-ignored.js']
+					projectPath: 'E:\\projects\\SVNS\\wallet-branches\\2.0\\BestWalletBox\\Best.WalletBox.Web',
+					csporjLocation: 'Best.WalletBox.Web.csproj',
+					watch: ['Scripts/SiteCharge/*.js', 'Content/SiteCharge/*.css', 'fonts/SiteCharge/**/*', 'Views/SiteCharge/*.cshtml'],	
 				}
 			}
 		},

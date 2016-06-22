@@ -10,19 +10,27 @@ var path = require('path');
 var fs = require('fs');
 var cheerio = require('cheerio');
 var _ = require('lodash');
-var beautify = require('js-beautify').html;
-var beautifyOptions = {
-	'brace_style': 'collapse', // [collapse|expand|end-expand|none] Put braces on the same line as control statements (default), or put braces on own line (Allman / ANSI style), or just put end braces on own line, or attempt to keep them where they are
-    'end_with_newline': false, // End output with newline
-    'indent_char': '', // Indentation character
-    'indent_handlebars': false, // e.g. {{#foo}}, {{/foo}}
-    'indent_inner_html': false, // Indent <head> and <body> sections
-    'indent_scripts': 'keep', // [keep|separate|normal]
-    'indent_size': 4, // Indentation size
-    'max_preserve_newlines': 0, // Maximum number of line breaks to be preserved in one chunk (0 disables)
-    'preserve_newlines': true, // Whether existing line breaks before elements should be preserved (only works before elements, not inside tags or for text)
-	'wrap_line_length': 0 // Lines should wrap at next opportunity after this number of characters (0 disables)
+var cheerioOptions = {
+	normalizeWhitespace: true,
+	xmlMode: true,
+	decodeEntities: false
 };
+var beautify = require('vkbeautify').xml;
+var beautifyOptions = '  ';
+// var beautifyOptions = {
+// 	'brace_style': 'collapse', // [collapse|expand|end-expand|none] Put braces on the same line as control statements (default), or put braces on own line (Allman / ANSI style), or just put end braces on own line, or attempt to keep them where they are
+//     'end_with_newline': false, // End output with newline
+//     'indent_char': ' ', // Indentation character
+//     'indent_handlebars': false, // e.g. {{#foo}}, {{/foo}}
+//     'indent_inner_html': false, // Indent <head> and <body> sections
+//     'indent_scripts': 'keep', // [keep|separate|normal]
+//     'indent_size': 4, // Indentation size
+//     'max_preserve_newlines': 0, // Maximum number of line breaks to be preserved in one chunk (0 disables)
+//     'preserve_newlines': true, // Whether existing line breaks before elements should be preserved (only works before elements, not inside tags or for text)
+// 	'wrap_line_length': 0, // Lines should wrap at next opportunity after this number of characters (0 disables)
+// 	'unformatted': [],
+// 	'extra_liners': ['ItemGroup']
+// };
 module.exports = function (grunt) {
 	var getContentTag = function (file){
 		return '<Content Include="' + file + '" />';
@@ -31,11 +39,11 @@ module.exports = function (grunt) {
 		var result = [];
 		options[key].forEach(function (pattern){
 			var files = grunt.file.expand({
-				cwd: process.cwd(),
+				cwd: options.projectPath,
 				filter: 'isFile'
-			}, path.join(options.projectPath, pattern));
+			}, pattern);
 			result = result.concat(files.map(function (filepath){
-				return path.relative(options.projectPath, filepath);
+				return path.win32.normalize(filepath);
 			}));
 		});
 		return result;
@@ -72,7 +80,7 @@ module.exports = function (grunt) {
 			return false;
 		}
 		//load csproj XML
-		var $ = cheerio.load(csproj, {normalizeWhitespace: true, xmlMode: true});
+		var $ = cheerio.load(csproj, cheerioOptions);
 		var $assetsContainer = null;
 		var $Project = $('Project');
 		if(!$Project.length){
@@ -106,7 +114,7 @@ module.exports = function (grunt) {
 			var $this = $(this);
 			var filepath = $this.attr('Include');
 			if(grunt.file.isMatch(options.watch, filepath)){
-				if(srcJoined.indexOf( filepath + spliter) === -1){
+				if(srcJoined.indexOf(path.win32.normalize(filepath) + spliter) === -1){
 					$this.remove();
 				}
 				else{
@@ -121,7 +129,7 @@ module.exports = function (grunt) {
 			$needAddContents += getContentTag(filepath);
 		});
 		$assetsContainer.append($needAddContents);
-		grunt.file.write(csprojFile, beautify($.root().html(), beautifyOptions));
+		grunt.file.write(csprojFile, beautify($.xml(), beautifyOptions));
 	});
 
 };
