@@ -1,0 +1,39 @@
+{
+  "name": "grunt-csproj",
+  "description": "sync project assets to .csproj file",
+  "version": "0.1.0",
+  "homepage": "https://github.com/pray-m/grunt-csproj",
+  "author": {
+    "name": "pray-m",
+    "email": "sean_lr@163.com",
+    "url": "https://github.com/pray-m"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pray-m/grunt-csproj.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pray-m/grunt-csproj/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "js-beautify": "^1.6.3",
+    "lodash": "^4.13.1"
+  }
+}

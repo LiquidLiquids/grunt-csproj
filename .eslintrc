@@ -1,0 +1,54 @@
+{
+    "globals":{
+        "__dirname": false,
+        "__filename": false,
+        "module": false,
+        "process": false
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "modules": true
+        }
+    },
+    "env": {
+        "browser": true,
+        "amd": true,
+        "es6": true
+    },
+    "rules": {
+        "no-unused-expressions": 2,
+        "strict": 0,
+        "global-strict": 0,
+        "no-underscore-dangle": 0,
+        "space-infix-ops": [2, {"int32Hint": false}],
+        "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
+        "comma-spacing": [2, {"before": false, "after": true}],
+        "semi": [2, "always"],
+        "semi-spacing": [2, {"before": false, "after": true}],
+        "no-undef": 2,
+        "curly": 2,
+        "no-empty": 2,
+        "no-alert": 2,
+        "no-console": 0,
+        "no-redeclare": 2,
+        "valid-typeof": 2,
+        "no-dupe-keys": 2,
+        "no-dupe-args": 2,
+        "no-unreachable":2,
+        "no-delete-var": 2,
+        "no-extra-semi": 2,
+        "no-unused-vars": [2, {"vars": "all", "args": "after-used"}],
+        "no-const-assign": 2,
+        "no-multi-spaces": 2,
+        "no-mixed-spaces-and-tabs": 2,
+        "no-shadow-restricted-names": 2,
+        "quotes": [ 1, "single"],
+        "eqeqeq": 1,
+        "no-shadow": 1,
+        "padded-blocks": 0,
+        "no-use-before-define": 1,
+        "no-unneeded-ternary": 1
+    }
+}
