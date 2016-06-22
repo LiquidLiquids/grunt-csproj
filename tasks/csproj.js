@@ -11,10 +11,19 @@ var fs = require('fs');
 var cheerio = require('cheerio');
 var _ = require('lodash');
 var beautify = require('js-beautify').html;
+var beautifyOptions = {
+	'brace_style': 'collapse', // [collapse|expand|end-expand|none] Put braces on the same line as control statements (default), or put braces on own line (Allman / ANSI style), or just put end braces on own line, or attempt to keep them where they are
+    'end_with_newline': false, // End output with newline
+    'indent_char': '', // Indentation character
+    'indent_handlebars': false, // e.g. {{#foo}}, {{/foo}}
+    'indent_inner_html': false, // Indent <head> and <body> sections
+    'indent_scripts': 'keep', // [keep|separate|normal]
+    'indent_size': 4, // Indentation size
+    'max_preserve_newlines': 0, // Maximum number of line breaks to be preserved in one chunk (0 disables)
+    'preserve_newlines': true, // Whether existing line breaks before elements should be preserved (only works before elements, not inside tags or for text)
+	'wrap_line_length': 0 // Lines should wrap at next opportunity after this number of characters (0 disables)
+};
 module.exports = function (grunt) {
-
-	// Please see the Grunt documentation for more information regarding task
-	// creation: http://gruntjs.com/creating-tasks
 	var getContentTag = function (file){
 		return '<Content Include="' + file + '" />';
 	};
@@ -22,7 +31,8 @@ module.exports = function (grunt) {
 		var result = [];
 		options[key].forEach(function (pattern){
 			var files = grunt.file.expand({
-				cwd: process.cwd()
+				cwd: process.cwd(),
+				filter: 'isFile'
 			}, path.join(options.projectPath, pattern));
 			result = result.concat(files.map(function (filepath){
 				return path.relative(options.projectPath, filepath);
@@ -30,6 +40,8 @@ module.exports = function (grunt) {
 		});
 		return result;
 	};
+	// Please see the Grunt documentation for more information regarding task
+	// creation: http://gruntjs.com/creating-tasks
 	grunt.registerMultiTask('csproj', 'sync project assets to .csproj file', function () {
 		// Merge task-specific and/or target-specific options with these defaults.
 		var options = this.options({
@@ -109,7 +121,7 @@ module.exports = function (grunt) {
 			$needAddContents += getContentTag(filepath);
 		});
 		$assetsContainer.append($needAddContents);
-		grunt.file.write(csprojFile, beautify($.root().html()));
+		grunt.file.write(csprojFile, beautify($.root().html(), beautifyOptions));
 	});
 
 };
