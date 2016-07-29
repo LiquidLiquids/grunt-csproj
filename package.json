@@ -1,19 +1,19 @@
 {
   "name": "grunt-csproj",
   "description": "sync project assets to .csproj file",
-  "version": "0.1.0",
-  "homepage": "https://github.com/pray-m/grunt-csproj",
+  "version": "0.1.2",
+  "homepage": "https://github.com/LiquidLiquids/grunt-csproj",
   "author": {
-    "name": "pray-m",
-    "email": "sean_lr@163.com",
-    "url": "https://github.com/pray-m"
+    "name": "LiquidLiquids",
+    "email": "flin3124@gmail.com",
+    "url": "https://github.com/LiquidLiquids"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/pray-m/grunt-csproj.git"
+    "url": "git://github.com/LiquidLiquids/grunt-csproj.git"
   },
   "bugs": {
-    "url": "https://github.com/pray-m/grunt-csproj/issues"
+    "url": "https://github.com/LiquidLiquids/grunt-csproj/issues"
   },
   "license": "MIT",
   "engines": {

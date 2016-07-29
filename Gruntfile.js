@@ -1,8 +1,8 @@
 /*
  * grunt-csproj
- * https://github.com/pray-m/grunt-csproj
+ * https://github.com/LiquidLiquids/grunt-csproj
  *
- * Copyright (c) 2016 pray-m
+ * Copyright (c) 2016 LiquidLiquids
  * Licensed under the MIT license.
  */
 

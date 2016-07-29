@@ -1,8 +1,8 @@
 /*
  * grunt-csproj
- * https://github.com/pray-m/grunt-csproj
+ * https://github.com/LiquidLiquids/grunt-csproj
  *
- * Copyright (c) 2016 pray-m
+ * Copyright (c) 2016 LiquidLiquids
  * Licensed under the MIT license.
  */
 'use strict';
@@ -17,20 +17,6 @@ var cheerioOptions = {
 };
 var beautify = require('vkbeautify').xml;
 var beautifyOptions = '  ';
-// var beautifyOptions = {
-// 	'brace_style': 'collapse', // [collapse|expand|end-expand|none] Put braces on the same line as control statements (default), or put braces on own line (Allman / ANSI style), or just put end braces on own line, or attempt to keep them where they are
-//     'end_with_newline': false, // End output with newline
-//     'indent_char': ' ', // Indentation character
-//     'indent_handlebars': false, // e.g. {{#foo}}, {{/foo}}
-//     'indent_inner_html': false, // Indent <head> and <body> sections
-//     'indent_scripts': 'keep', // [keep|separate|normal]
-//     'indent_size': 4, // Indentation size
-//     'max_preserve_newlines': 0, // Maximum number of line breaks to be preserved in one chunk (0 disables)
-//     'preserve_newlines': true, // Whether existing line breaks before elements should be preserved (only works before elements, not inside tags or for text)
-// 	'wrap_line_length': 0, // Lines should wrap at next opportunity after this number of characters (0 disables)
-// 	'unformatted': [],
-// 	'extra_liners': ['ItemGroup']
-// };
 module.exports = function (grunt) {
 	var getContentTag = function (file){
 		return '<Content Include="' + file + '" />';
@@ -129,7 +115,7 @@ module.exports = function (grunt) {
 			$needAddContents += getContentTag(filepath);
 		});
 		$assetsContainer.append($needAddContents);
-		grunt.file.write(csprojFile, beautify($.xml(), beautifyOptions));
+		grunt.file.write(csprojFile, beautify($.xml(), beautifyOptions).replace(/^\s*/, ''));
 	});
 
 };
