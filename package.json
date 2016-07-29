@@ -1,7 +1,7 @@
 {
   "name": "grunt-csproj",
   "description": "sync project assets to .csproj file",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage": "https://github.com/LiquidLiquids/grunt-csproj",
   "author": {
     "name": "LiquidLiquids",
